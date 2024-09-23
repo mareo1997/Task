@@ -29,7 +29,9 @@ Team will pull and run the code to test the API so ensure Readme include all det
 
 The application runs on port 8080. 
 
-To test in postman run the urls
+To test in postman run the urls. 
+
+I was unable to run the springboot application properly due to differences in Java Runtime version but the methods and classes should be working correctly.
 
 GET
 
