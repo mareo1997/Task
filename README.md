@@ -32,6 +32,7 @@ The application runs on port 8080.
 To test in postman run the urls
 
 GET
+
 http://localhost:8080/tasks
 
 Should return the list of all tasks in in JSON format due to using RESTController annotation. 
@@ -48,6 +49,7 @@ Uses a try catch method for nullpointer and indexoutofbounds exceptions. If ther
 
 
 POST
+
 http://localhost:8080/tasks
 
 Takes input in JSON format. Below is an example of a format that should be accpted. If the task is created then the message REGISTRATION SUCCESSFUL and 200 will return if not then INVALID FORM DATA and 400.
@@ -61,8 +63,19 @@ Takes input in JSON format. Below is an example of a format that should be accpt
 }
 
 PUT
-http://localhost:8080/tasks/:id
 
+http://localhost:8080/tasks/?id=1
+
+Takes input in JSON format. Below is an example of a format that should be accpted. If the task is updated then the message UPDATE SUCCESSFUL and 200 will return if not then INVALID FORM DATA and 400.
+
+{
+  "id": 1,
+  "title": "Star Wars",
+  "description": "Fantasy genre",
+  "completed": true,
+  "createDate": "1976-10-20",
+  "completed": "2020-05-04"  
+}
 
 
 
