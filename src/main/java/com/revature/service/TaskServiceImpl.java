@@ -28,9 +28,21 @@ public class TaskServiceImpl implements TaskService {
 //		return null;
 	}
 
-	public List<Task> getTaskById(int id) {
+	public Task getTaskById(int id) {
 		// TODO Auto-generated method stub
-		return taskRepository.getTaskById(id);
+		
+		try {
+			List<Task> list = taskRepository.getTaskById(id);
+			
+			return list.get(0);
+		} catch (NullPointerException e) {
+			return null;
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	public boolean createTask(Task tasks) {

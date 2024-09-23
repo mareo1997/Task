@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.ajax.ClientMessage;
@@ -33,7 +33,7 @@ public class TaskControllerImpl implements TaskController {
 	@Autowired
 	private TaskService taskService;
 	
-	@GetMapping("")
+	@GetMapping
 	public ResponseEntity<List<TaskDTO>> getAllTask(){
 		List<TaskDTO> body = null;
 		List<Task> tasks = this.taskService.getAllTask();
@@ -51,25 +51,25 @@ public class TaskControllerImpl implements TaskController {
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
-	@GetMapping("/:id")
-	public ResponseEntity<List<TaskDTO>> getTaskById(@RequestParam int id){
+	@GetMapping("/{id}")
+	public ResponseEntity<List<TaskDTO>> getTaskById(@PathVariable("id") int id){
 		List<TaskDTO> body = null;
-		List<Task> tasks = this.taskService.getTaskById(id);
+		Task tasks = this.taskService.getTaskById(id);
 		
-		if(tasks == null || tasks.isEmpty()) {
+		if(tasks == null) {
 			return new ResponseEntity<>(body, HttpStatus.NO_CONTENT);
 		} else {
 			body = new ArrayList<>();
 			
-			for(Task t: tasks) {
-				body.add(new TaskDTO(t.getId(), t.getTitle(), t.getDescription(), t.isCompleted(), t.getCreateDate(), t.getCompletedDate()));
-			}
+//			for(Task t: tasks) {
+				body.add(new TaskDTO(tasks.getId(), tasks.getTitle(), tasks.getDescription(), tasks.isCompleted(), tasks.getCreateDate(), tasks.getCompletedDate()));
+//			}
 		}
 		
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 	
-	@PostMapping("")
+	@PostMapping
 	public ResponseEntity<ClientMessage> createTask(@RequestBody Task tasks){
 		
 //		boolean result = taskService.createTask(tasks);
@@ -85,8 +85,8 @@ public class TaskControllerImpl implements TaskController {
 				new ResponseEntity<>(ClientMessageUtil.INVALID_DATA, HttpStatus.BAD_REQUEST);
 	}
 	
-	@PutMapping("/:id")
-	public ResponseEntity<ClientMessage> updateTask(@RequestBody Task tasks){
+	@PutMapping("/id")
+	public ResponseEntity<ClientMessage> updateTask(/*@PathVariable("id") int id,*/ @RequestBody Task tasks){
 		
 //		boolean result = taskService.updateTask(tasks);
 //		
@@ -106,5 +106,11 @@ public class TaskControllerImpl implements TaskController {
 //				new ResponseEntity<>(INVALID_DATA, HttpStatus.BAD_REQUEST);
 
 	}
+
+//	@Override
+//	public ResponseEntity<ClientMessage> updateTask(Task tasks) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
