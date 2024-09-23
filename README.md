@@ -45,7 +45,7 @@ GET
 
 http://localhost:8080/tasks/?id=1
 
-Should return the JSON format on the id if it exists. The @PathVariable takes id to 
+Should return the JSON format on the id if it exists. The @PathVariable takes id to the repository and service methods.
 
 Uses a try catch method for nullpointer and indexoutofbounds exceptions. If there is no content or is null then status code returned is 204 otherwise 200.
 
@@ -57,6 +57,7 @@ http://localhost:8080/tasks
 Takes input in JSON format. Below is an example of a format that should be accpted. If the task is created then the message REGISTRATION SUCCESSFUL and 200 will return if not then INVALID FORM DATA and 400.
 
 {
+  "id": 1,
   "title": "Star Wars",
   "description": "Sci fi genre",
   "completed": false,
@@ -67,6 +68,8 @@ Takes input in JSON format. Below is an example of a format that should be accpt
 PUT
 
 http://localhost:8080/tasks/?id=1
+
+Had trouble incorporating using only id as param. So used a request body to complete the task.
 
 Takes input in JSON format. Below is an example of a format that should be accpted. If the task is updated then the message UPDATE SUCCESSFUL and 200 will return if not then INVALID FORM DATA and 400.
 
